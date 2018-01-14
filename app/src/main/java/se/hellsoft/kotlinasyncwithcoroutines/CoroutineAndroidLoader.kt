@@ -15,6 +15,7 @@ import kotlinx.coroutines.experimental.newFixedThreadPoolContext
 
 // Quick & dirty logcat extensions
 inline fun <reified T> T.logd(message: () -> String) = Log.d(T::class.simpleName, message())
+
 inline fun <reified T> T.loge(error: Throwable, message: () -> String) = Log.d(T::class.simpleName, message(), error)
 
 internal class CoroutineLifecycleListener(private val deferred: Deferred<*>) : LifecycleObserver {
@@ -23,11 +24,6 @@ internal class CoroutineLifecycleListener(private val deferred: Deferred<*>) : L
     if (!deferred.isCancelled) {
       deferred.cancel()
     }
-  }
-
-  @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-  fun resumeCoroutine() {
-    deferred.
   }
 }
 
