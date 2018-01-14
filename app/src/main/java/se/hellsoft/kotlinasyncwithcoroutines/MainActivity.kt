@@ -6,7 +6,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.experimental.delay
 
@@ -30,14 +29,7 @@ class MainActivity : AppCompatActivity() {
     if (savedInstanceState != null && savedInstanceState.containsKey(KEY_IMAGE_URI)) {
       logd { "Saved state contains an image Uri. Let's assign it to imageUri." }
       imageUri = savedInstanceState.getParcelable(KEY_IMAGE_URI) as Uri
-    }
-  }
-
-  override fun onStart() {
-    super.onStart()
-    imageUri?.let {
-      logd { "We're starting up again with an existing imageUri. Let's load that." }
-      loadAndShowPhoto(it)
+      imageUri?.let { loadAndShowPhoto(it) }
     }
   }
 
